@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Question</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #fce4ec, #f8bbd0); /* خلفية زهرية ناعمة */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        #container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 500px;
+            transition: all 0.5s ease;
+        }
+
+        h1 {
+            color: #d81b60;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            font-size: 18px;
+        }
+
+        #yesBtn {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .result-page {
+            display: none;
+        }
+
+        .result-page h2 {
+            color: #ad1457;
+            line-height: 1.6;
+        }
+
+        .mate-icon {
+            font-size: 50px;
+            margin: 20px 0;
+        }
+
+        .decor {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الديكور الخلفي -->
+    <div style="position: absolute; top: 10%; left: 10%; font-size: 30px;">🌸</div>
+    <div style="position: absolute; bottom: 10%; right: 10%; font-size: 30px;">✨</div>
+    <div style="position: absolute; top: 20%; right: 15%; font-size: 25px;">💖</div>
+
+    <div id="container">
+        <!-- صفحة السؤال -->
+        <div id="question-area">
+            <h1 id="questionText">Is Yaman the most beautiful thing ever?</h1>
+            <div class="buttons">
+                <button id="yesBtn" onclick="showSurprise()">Yes</button>
+                <button id="noBtn" onclick="shrinkNo()">No</button>
+            </div>
+        </div>
+
+        <!-- صفحة النتيجة -->
+        <div id="result-area" class="result-page">
+            <div class="mate-icon">🧉✨</div>
+            <h2>
+                Batoul Wassouf, the kind and beautiful girl who loves drinking Mate more than anyone! <br><br>
+                I just wanted to make this cute thing for you to tell you that you are a very cute and pretty person. <br><br>
+                I wish you the most beautiful days ever! 🌸
+            </h2>
+        </div>
+    </div>
+
+    <script>
+        let yesSize = 18;
+        let noSize = 18;
+
+        function shrinkNo() {
+            // تصغير زر لا
+            noSize -= 2;
+            if (noSize < 5) noSize = 5; // حد أدنى للحجم
+            document.getElementById('noBtn').style.fontSize = noSize + "px";
+            document.getElementById('noBtn').style.padding = (noSize/1.2) + "px " + (noSize*1.5) + "px";
+
+            // تكبير زر نعم
+            yesSize += 15;
+            document.getElementById('yesBtn').style.fontSize = yesSize + "px";
+            document.getElementById('yesBtn').style.padding = (yesSize/1.2) + "px " + (yesSize*1.5) + "px";
+        }
+
+        function showSurprise() {
+            document.getElementById('question-area').style.display = 'none';
+document.getElementById('result-area').style.display = 'block';
+            document.body.style.background = "linear-gradient(135deg, #f8bbd0, #f48fb1)";
+            
+            // إضافة تأثير القلوب المتطايرة (بسيط)
+            for(let i=0; i<20; i++) {
+                createHeart();
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.className = 'decor';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '100vh';
+            heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+            document.body.appendChild(heart);
+
+            let pos = 100;
+            const interval = setInterval(() => {
+                pos -= 1;
+                heart.style.top = pos + 'vh';
+                if (pos < -10) {
+                    clearInterval(interval);
+                    heart.remove();
+                }
+            }, 20);
+        }
+    </script>
+</body>
+</html>
